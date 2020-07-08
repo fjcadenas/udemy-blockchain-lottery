@@ -3,9 +3,9 @@ dotenv.config();
 
 import HDWalletProvider from "@truffle/hdwallet-provider";
 import Web3 from "web3"; // its a constructor
-import inbox from "./compile";
+import lottery from "./compile";
 
-const { abi, evm } = inbox;
+const { abi, evm } = lottery;
 
 console.log(process.env.MNEMONIC);
 const provider = new HDWalletProvider(
@@ -19,7 +19,7 @@ const deploy = async () => {
   console.log(`Attempting to use account ${accounts[0]}`);
 
   const result = await new web3.eth.Contract(abi)
-    .deploy({ data: evm.bytecode.object, arguments: ["Hi There!"] })
+    .deploy({ data: evm.bytecode.object })
     .send({ gas: "1000000", from: accounts[0] });
 
   console.log(`Contract deployed to ${result.options.address}`);
